@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка...</title>
+    <style>
+        /* Стили для центрирования изображения и заполнения экрана */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Минимальная высота на весь экран */
+            background-color: #000; /* Черный фон */
+            overflow: hidden; /* Скрыть полосы прокрутки, если изображение выходит за пределы */
+            flex-direction: column; /* Элементы будут выстраиваться в колонку */
+            color: #ccc; /* Цвет текста загрузки */
+            font-family: sans-serif;
+            font-size: 1.2em;
+        }
+        img {
+            max-width: 100vw; /* Максимальная ширина viewport */
+            max-height: 100vh; /* Максимальная высота viewport */
+            object-fit: contain; /* Изображение будет масштабироваться, чтобы поместиться, сохраняя пропорции */
+            display: block; /* Убирает лишний отступ под изображением */
+            margin-bottom: 20px; /* Отступ между изображением и текстом */
+        }
+    </style>
+</head>
+<body>
+    <!-- Здесь будет отображаться ваше изображение fsociety -->
+    <img src="https://habrastorage.org/getpro/habr/upload_files/d17/973/fa5/d17973fa5d63bf9e17294f9e0720436d.jpeg" alt="fsociety">
+    <p>Загрузка... Перенаправление на вашу ссылку через <span id="countdown">3</span> секунд</p>
+
+    <script>
+        // Здесь будет ваш JavaScript для перенаправления
+        const finalLink = 'https://stopify.co/BYQ8EG.png'; // <--- ВАША КОНЕЧНАЯ ССЫЛКА ЗДЕСЬ
+        const delay = 3000; // Задержка в миллисекундах (3000 = 3 секунды)
+
+        let countdownElement = document.getElementById('countdown');
+        let timeLeft = delay / 1000;
+
+        function updateCountdown() {
+            countdownElement.textContent = timeLeft;
+            timeLeft--;
+            if (timeLeft < 0) {
+                clearInterval(countdownInterval);
+            }
+        }
+
+        updateCountdown(); // Обновить сразу, чтобы показать 3
+        const countdownInterval = setInterval(updateCountdown, 1000); // Обновлять каждую секунду
+
+        setTimeout(() => {
+            window.location.replace(finalLink); // Перенаправление на конечную ссылку
+            // Используйте replace, чтобы пользователь не мог вернуться на эту страницу по кнопке "Назад"
+        }, delay);
+    </script>
+</body>
+</html>
